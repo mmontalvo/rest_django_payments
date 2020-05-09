@@ -25,12 +25,14 @@ SECRET_KEY = 'su9id&)ww_kn0%^vus+e)0^z!14hu)fu$r6rs=&d_t3hx=ise7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,8 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'moneyfx',
         'USER': 'postgres',
-	'PASSWORD': '',
-        'HOST': 'db',
+	'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST': os.environ.get('MONEYFX_PG_HOST', 'db'),
         'PORT': 5432,
     }
 }
