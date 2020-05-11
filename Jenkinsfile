@@ -70,8 +70,5 @@ pipeline {
         }
       }
     }
-    stage('preview') {
-
-    }
   }
 }
