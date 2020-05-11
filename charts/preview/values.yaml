@@ -16,7 +16,7 @@ cleanup:
     helm.sh/hook-delete-policy: hook-succeeded
 
 preview:
-  nameOverride: rest_django_payments
+  nameOverride: rest-django-payments
   replicaCount: 1
   image:
     repository:
