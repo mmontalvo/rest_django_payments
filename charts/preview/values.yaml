@@ -16,7 +16,18 @@ cleanup:
     helm.sh/hook-delete-policy: hook-succeeded
 
 preview:
+  nameOverride: rest_django_payments
+  replicaCount: 1
   image:
     repository:
     tag:
     pullPolicy: IfNotPresent
+
+postgresql:
+  fullnameOverride: postgresql
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    annotations: {}
+  postgresqlDatabase: moneyfx
