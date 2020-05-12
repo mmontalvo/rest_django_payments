@@ -6,7 +6,7 @@ pipeline {
     ORG = 'mmontalvo'
     APP_NAME = 'rest-django-payments'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
-    DOCKER_REGISTRY_ORG = '819478613413.dkr.ecr.eu-west-1.amazonaws.com'
+    DOCKER_REGISTRY_ORG = 'mmontalvo'
   }
   stages {
     stage('CI Build and push snapshot') {
