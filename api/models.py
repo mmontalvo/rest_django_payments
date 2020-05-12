@@ -13,6 +13,9 @@ class Payment(models.Model):
     def __str__(self):
         return self.deal_reference
 
+    def get_sell_buy_format(self):
+        return self.sell_currency + self.buy_currency
+
 class BankTransfer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     payment = models.ForeignKey(Payment, null=True, on_delete=models.SET_NULL)

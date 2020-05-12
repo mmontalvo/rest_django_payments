@@ -25,7 +25,8 @@ pipeline {
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
           dir('./charts/preview') {
             sh "make preview"
-            sh "jx preview --app $APP_NAME --dir ../.."
+            sh "kubectl create namespace $PREVIEW_NAMESPACE --dry-run -o yaml | kubectl apply -f -"
+            sh "jx preview --app $APP_NAME --dir ../.. --timeout=15m"
           }
         }
       }
