@@ -6,4 +6,6 @@ COPY requirements.txt /rest_django_payments/
 RUN pip install -r requirements.txt
 ADD . /rest_django_payments/
 
+EXPOSE 8200
+
 CMD python manage.py runserver 0.0.0.0:8200
