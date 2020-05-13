@@ -50,8 +50,6 @@ pipeline {
           sh "git config --global credential.helper store"
           sh "jx step git credentials"
 
-          VERSION = PREVIEW_VERSION
-
           sh "jx step next-version --use-git-tag-only --tag"
           sh "docker build  --network host -t $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION) ."
           sh "docker push $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
