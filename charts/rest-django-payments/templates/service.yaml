@@ -17,10 +17,14 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  - port: 8200
+  - port: {{ .Values.service.externalPort }}
     targetPort: {{ .Values.service.internalPort }}
     protocol: TCP
     name: http
+  - port: 8200
+    targetPort: {{ .Values.service.internalPort }}
+    protocol: TCP
+    name: http-old
   selector:
     app: {{ template "fullname" . }}
 {{- end }}
