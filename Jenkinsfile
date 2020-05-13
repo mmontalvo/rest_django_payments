@@ -9,7 +9,7 @@ pipeline {
     DOCKER_REGISTRY_ORG = 'mmontalvo'
   }
   stages {
-    stage('CI Build and push snapshot') {
+    stage('build branch') {
       when {
         branch 'PR-*'
       }
@@ -20,14 +20,23 @@ pipeline {
       }
       steps {
         container('python') {
-          sh "python -m unittest"
-          sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
-          sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
+          sh "docker build --network host -t $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION ."
+          sh "docker push $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
+
           dir('./charts/preview') {
             sh "make preview"
+            sh "jx preview --app $APP_NAME --dir ../.."
             sh "kubectl create namespace $PREVIEW_NAMESPACE --dry-run -o yaml | kubectl apply -f -"
             sh "jx preview --app $APP_NAME --dir ../.. --timeout=15m"
           }
+          // sh "python -m unittest"
+          // sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
+          // sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
+          // dir('./charts/preview') {
+          //   sh "make preview"
+          //   sh "kubectl create namespace $PREVIEW_NAMESPACE --dry-run -o yaml | kubectl apply -f -"
+          //   sh "jx preview --app $APP_NAME --dir ../.. --timeout=15m"
+          // }
         }
       }
     }
@@ -37,18 +46,26 @@ pipeline {
       }
       steps {
         container('python') {
-
-          // ensure we're not on a detached head
           sh "git checkout master"
           sh "git config --global credential.helper store"
           sh "jx step git credentials"
 
+          VERSION = PREVIEW_VERSION
+
+          sh "jx step next-version --use-git-tag-only --tag"
+          sh "docker build  --network host -t $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION) ."
+          sh "docker push $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+
+          dir('./charts/pricing') {
+            sh "jx step helm release"
+          }
+
           // so we can retrieve the version in later steps
-          sh "echo \$(jx-release-version) > VERSION"
-          sh "jx step tag --version \$(cat VERSION)"
-          sh "python -m unittest"
-          sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
-          sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+          // sh "echo \$(jx-release-version) > VERSION"
+          // sh "jx step tag --version \$(cat VERSION)"
+          // sh "python -m unittest"
+          // sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
+          // sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
         }
       }
     }
