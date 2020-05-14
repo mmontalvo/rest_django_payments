@@ -32,4 +32,4 @@ postgresql:
     annotations: {}
   postgresqlDatabase: moneyfx
   postgresqlPassword: 'admiN1&FX'
-  password: admiN1&FX
+  password: 'admiN1&FX'
