@@ -8,4 +8,4 @@ ADD . /rest_django_payments/
 
 EXPOSE 8080
 
-CMD python manage.py runserver 0.0.0.0:8080
+CMD ["gunicorn", "--chdir", "rest_django_payments", "--bind", ":8080", "rest_django_payments.wsgi:application"]
