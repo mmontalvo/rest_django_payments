@@ -21,10 +21,6 @@ spec:
     targetPort: {{ .Values.service.internalPort }}
     protocol: TCP
     name: http
-  - port: 8200
-    targetPort: {{ .Values.service.internalPort }}
-    protocol: TCP
-    name: http-old
   selector:
     app: {{ template "fullname" . }}
 {{- end }}
