@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'moneyfx',
         'USER': 'postgres',
 	'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': os.environ.get('MONEYFX_PG_HOST', 'db'),
+        'HOST': os.environ.get('MONEYFX_PG_HOST', 'postgresql'),
         'PORT': 5432,
     }
 }
