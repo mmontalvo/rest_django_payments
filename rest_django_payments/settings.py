@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'moneyfx',
         'USER': 'postgres',
-	'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+	'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'admiN1&FX'),
         'HOST': os.environ.get('MONEYFX_PG_HOST', 'postgresql'),
         'PORT': 5432,
     }

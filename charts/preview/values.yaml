@@ -31,3 +31,4 @@ postgresql:
     size: 1Gi
     annotations: {}
   postgresqlDatabase: moneyfx
+  postgresqlPassword: admiN1&FX
