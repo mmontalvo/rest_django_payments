@@ -31,5 +31,4 @@ postgresql:
     size: 1Gi
     annotations: {}
   postgresqlDatabase: moneyfx
-  postgresqlPassword: 'admiN1&FX'
-  password: 'admiN1&FX'
+  postgresqlPassword: admiN1&FX

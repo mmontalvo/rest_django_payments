@@ -9,6 +9,7 @@ image:
 
 # define environment variables here as a map of key: value
 env:
+  POSTGRES_PASSWORD: admiN1&FX
 
 # enable this flag to use knative serve to deploy the app
 knativeDeploy: false
