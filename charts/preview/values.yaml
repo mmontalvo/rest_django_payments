@@ -12,6 +12,15 @@ expose:
     exposer: Ingress
     http: true
     tlsacme: false
+mysql:
+  fullnameOverride: mysql
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 1Gi
+    annotations: {}
+  mysqlRootPassword: password
+  mysqlDatabase: moneyfx
 preview:
   image:
     pullPolicy: IfNotPresent
