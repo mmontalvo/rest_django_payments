@@ -9,6 +9,14 @@ dependencies:
   repository: http://chartmuseum.jenkins-x.io
   version: 2.3.92
 
+- name: mysql
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: ~0.12.0
+
+- name: rest-django-trading
+  repository: http://jenkins-x-chartmuseum:8080/
+  version: ">= 0.0.1"
+
   # !! "alias: preview" must be last entry in dependencies array !!
   # !! Place custom dependencies above !!
 - alias: preview
