@@ -21,9 +21,12 @@ mysql:
     annotations: {}
   mysqlRootPassword: password
   mysqlDatabase: moneyfx
+
 preview:
+  nameOverride: rest-django-payments
+  replicaCount: 1
   image:
+    repository:
+    tag:
     pullPolicy: IfNotPresent
-    repository: null
-    tag: null
   namespace: jx-previews
