@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.7.8
 ENV PYTHONUNBUFFERED 1
 RUN mkdir -p /manning/rest_django_payments
 WORKDIR /manning/rest_django_payments
