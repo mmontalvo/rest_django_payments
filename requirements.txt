@@ -1,5 +1,5 @@
 Django>=2.0,<3.0
 gunicorn==19.9.0
 django-mysql>=2.2.0
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 requests==2.23.0
